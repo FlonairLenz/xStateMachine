@@ -14,6 +14,8 @@ There is a document that can have the following states:
 The following figure illustrates the state transactions:
 ![alt text](https://raw.githubusercontent.com/FlonairLenz/xStateMachine/master/example/ExampleStateMachine.png "Sample state machine")
 
+We can see that a document cannot change from the state archived to the state deleted.
+
 `Current document state: Created`  
 `Current document state: Published`  
 `Current document state: Changed`  
