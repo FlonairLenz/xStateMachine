@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TStateMachine.Exceptions;
+using xStateMachine.Exceptions;
 
-namespace TStateMachine
+namespace xStateMachine
 {
     public class StateMachine<T>
     {
@@ -11,7 +11,7 @@ namespace TStateMachine
 
         private HashSet<T> CurrentTrasactions
         {
-            get => this._transactions[this.CurrentState];
+            get => this._transactions[this.CurrentState] ?? throw new TransactionNotFoundException();
         }
 
         private readonly Dictionary<T, HashSet<T>> _transactions;
@@ -22,14 +22,15 @@ namespace TStateMachine
         
         public StateMachine(T initialState)
         {
-            this.CurrentState = initialState;
             this._transactions = new Dictionary<T, HashSet<T>>();
+            this._transactions.Add(initialState, new HashSet<T>());
+            this.CurrentState = initialState;
         }
 
         public StateMachine(Dictionary<T, HashSet<T>> transactions, T initialState)
         {
-            this.CurrentState = initialState;
             this._transactions = transactions;
+            this.CurrentState = initialState;
         }
 
         #endregion
@@ -94,6 +95,15 @@ namespace TStateMachine
         public bool IsTransactionAllowedTo(T to)
         {
             return this.CurrentTrasactions.Contains(to);
+        }
+
+        /// <summary>
+        /// Check if the current state has any transactions
+        /// </summary>
+        /// <returns>Whether the current state has transactions</returns>
+        public bool HasTransactions()
+        {
+            return this._transactions.ContainsKey(this.CurrentState);
         }
         
         #endregion
