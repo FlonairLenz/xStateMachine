@@ -78,7 +78,7 @@ namespace xStateMachine
         /// <returns>The current state after the transaction ends</returns>
         public T ChangeState(T to)
         {
-            if (this.CurrentState != to) 
+            if (this.CurrentState.Equals(to)) 
             {
                 if (!IsTransactionAllowedTo(to))
                 {
