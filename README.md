@@ -23,6 +23,26 @@ We can see that a document cannot change from the state archived to the state de
 `Current document state: Archived`  
 `The transaction from state Archived to state Deleted is not valid.`
 
+## Create state machine
+
+`this._stateMachine = StateMachineBuilder.Create(DocumentState.Created);`
+
+## Add transaction
+
+`this._stateMachine.AddTransaction(DocumentState.Created, DocumentState.Published);`
+
+## Change state
+
+``` csharp
+public void Publish()
+{
+    if (this._stateMachine.IsTransactionAllowedTo(DocumentState.Published))
+    {
+        // Do something to publish
+        this._stateMachine.ChangeState(DocumentState.Published);
+    }
+}
+```
 
 ## Acknowledgements
 xStateMachine is built using the following open source and free projects:
