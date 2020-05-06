@@ -19,38 +19,38 @@ namespace xStateMachine.Tests
         }
         
         [Fact]
-        public void IsTransactionAllowedTo_ValidTransaction_ReturnTrue()
+        public void IsTransitionAllowedTo_ValidTransition_ReturnTrue()
         {
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
-            stateMachine.AddTransaction(State.Start, State.Working);
+            stateMachine.AddTransition(State.Start, State.Working);
             
             // Act
-            var transactionAllowed = stateMachine.IsTransactionAllowedTo(State.Working);
+            var transitionAllowed = stateMachine.IsTransitionAllowedTo(State.Working);
 
             // Assert
-            Assert.True(transactionAllowed);
+            Assert.True(transitionAllowed);
         }
         
         [Fact]
-        public void IsTransactionAllowedTo_InvalidTransaction_ReturnFalse()
+        public void IsTransitionAllowedTo_InvalidTransition_ReturnFalse()
         {
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
             
             // Act
-            var transactionAllowed = stateMachine.IsTransactionAllowedTo(State.Working);
+            var transitionAllowed = stateMachine.IsTransitionAllowedTo(State.Working);
 
             // Assert
-            Assert.False(transactionAllowed);
+            Assert.False(transitionAllowed);
         }
         
         [Fact]
-        public void ChangeState_ValidTransaction_ReturnNewState()
+        public void ChangeState_ValidTransition_ReturnNewState()
         {
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
-            stateMachine.AddTransaction(State.Start, State.Working);
+            stateMachine.AddTransition(State.Start, State.Working);
             
             // Act
             var newState = stateMachine.ChangeState(State.Working);
@@ -60,16 +60,16 @@ namespace xStateMachine.Tests
         }
         
         [Fact]
-        public void ChangeState_InvalidTransaction_ThrowInvalidTransactionException()
+        public void ChangeState_InvalidTransition_ThrowInvalidTransitionException()
         {
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
-            stateMachine.AddTransaction(State.Start, State.Working);
-            stateMachine.AddTransaction(State.Working, State.Deleted);
+            stateMachine.AddTransition(State.Start, State.Working);
+            stateMachine.AddTransition(State.Working, State.Deleted);
             
             
             // Act, Assert
-            Assert.Throws<InvalidTransactionException>(() => stateMachine.ChangeState(State.Deleted));
+            Assert.Throws<InvalidTransitionException>(() => stateMachine.ChangeState(State.Deleted));
         }
         
         [Fact]
@@ -77,7 +77,7 @@ namespace xStateMachine.Tests
         {
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
-            stateMachine.AddTransaction(State.Start, State.Working);
+            stateMachine.AddTransition(State.Start, State.Working);
 
             // Act
             var newState = stateMachine.ChangeState(State.Start);
