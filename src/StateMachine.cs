@@ -6,7 +6,7 @@ namespace TStateMachine
     public class StateMachine<T>
     {
         #region properties
-        
+
         public T CurrentState { get; private set; }
 
         private HashSet<T> CurrentTrasactions
@@ -19,7 +19,7 @@ namespace TStateMachine
         #endregion
 
         #region ctor
-
+        
         public StateMachine(T initialState)
         {
             this.CurrentState = initialState;
@@ -36,6 +36,11 @@ namespace TStateMachine
         
         #region methods (public)
 
+        /// <summary>
+        /// Add a transaction to the state machine
+        /// </summary>
+        /// <param name="from">State where the transaction starts</param>
+        /// <param name="to">State where the transaction ends</param>
         public void AddTransaction(T from, T to)
         {
             if (!this._transactions.ContainsKey(from))
@@ -48,6 +53,11 @@ namespace TStateMachine
             }
         }
         
+        /// <summary>
+        /// Add a set of transactions to the state machine
+        /// </summary>
+        /// <param name="from">State where the transaction starts</param>
+        /// <param name="to">State where the transaction ends</param>
         public void AddTransaction(T from, HashSet<T> to)
         {
             if (!this._transactions.ContainsKey(from))
@@ -60,6 +70,11 @@ namespace TStateMachine
             }
         }
 
+        /// <summary>
+        /// Change the current state to a new one
+        /// </summary>
+        /// <param name="to">State where the transaction ends</param>
+        /// <returns>The current state after the transaction ends</returns>
         public T ChangeState(T to)
         {
             if (!IsTransactionAllowedTo(to))
@@ -71,6 +86,11 @@ namespace TStateMachine
             return this.CurrentState;
         }
 
+        /// <summary>
+        /// Check if the transaction from the current state to a new state is valid
+        /// </summary>
+        /// <param name="to">State where the transaction ends</param>
+        /// <returns>Whether the transaction is valid</returns>
         public bool IsTransactionAllowedTo(T to)
         {
             return this.CurrentTrasactions.Contains(to);
