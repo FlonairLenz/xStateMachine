@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\xStateMachine.csproj" />
+      <ProjectReference Include="..\xStateMachine\xStateMachine.csproj" />
     </ItemGroup>
 
 </Project>
