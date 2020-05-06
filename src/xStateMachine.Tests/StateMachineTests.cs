@@ -65,15 +65,32 @@ namespace xStateMachine.Tests
             // Arrange
             var stateMachine = StateMachineBuilder.Create(State.Start);
             stateMachine.AddTransaction(State.Start, State.Working);
+            stateMachine.AddTransaction(State.Working, State.Deleted);
+            
             
             // Act, Assert
-            Assert.Throws<InvalidTransactionException>(() => stateMachine.ChangeState(State.Start));
+            Assert.Throws<InvalidTransactionException>(() => stateMachine.ChangeState(State.Deleted));
+        }
+        
+        [Fact]
+        public void ChangeState_CurrentStateEqualsNewState_ReturnCurrentState()
+        {
+            // Arrange
+            var stateMachine = StateMachineBuilder.Create(State.Start);
+            stateMachine.AddTransaction(State.Start, State.Working);
+
+            // Act
+            var newState = stateMachine.ChangeState(State.Start);
+
+            // Assert
+            Assert.Equal(State.Start, newState);
         }
     }
 
     enum State
     {
         Start,
-        Working
+        Working,
+        Deleted,
     }
 }
