@@ -25,11 +25,15 @@ We can see that a document cannot change from the state archived to the state de
 
 ## Create state machine
 
-`this._stateMachine = StateMachineBuilder.Create(DocumentState.Created);`
+``` csharp
+this._stateMachine = StateMachineBuilder.Create(DocumentState.Created);
+```
 
 ## Add transaction
 
-`this._stateMachine.AddTransaction(DocumentState.Created, DocumentState.Published);`
+``` csharp
+this._stateMachine.AddTransaction(DocumentState.Created, DocumentState.Published);
+```
 
 ## Change state
 
