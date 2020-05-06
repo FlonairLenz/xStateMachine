@@ -4,4 +4,16 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Remove="xStateMachine.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="xStateMachine.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="xStateMachine.Tests\**" />
+    </ItemGroup>
+
 </Project>
