@@ -1,7 +1,19 @@
 ## About xStateMachine
 xStateMachine is a free, open source state machine for .NET.
 
-## Example output
+## Example
+
+There is a document that can have the following states:
+
+- Created
+- Published
+- Changed
+- Deleted
+- Archived
+
+The following figure illustrates the state transactions:
+![alt text](https://raw.githubusercontent.com/FlonairLenz/xStateMachine/master/example/ExampleStateMachine.png "Sample state machine")
+
 `Current document state: Created`  
 `Current document state: Published`  
 `Current document state: Changed`  
