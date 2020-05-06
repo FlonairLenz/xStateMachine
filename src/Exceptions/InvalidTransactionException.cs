@@ -1,6 +1,6 @@
 using System;
 
-namespace TStateMachine.Exceptions
+namespace xStateMachine.Exceptions
 {
     public class InvalidTransactionException : Exception
     {
