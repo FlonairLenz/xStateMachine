@@ -78,12 +78,15 @@ namespace xStateMachine
         /// <returns>The current state after the transaction ends</returns>
         public T ChangeState(T to)
         {
-            if (!IsTransactionAllowedTo(to))
+            if (this.CurrentState != to) 
             {
-                throw new InvalidTransactionException(this.CurrentState.ToString(), to.ToString());
-            }
+                if (!IsTransactionAllowedTo(to))
+                {
+                    throw new InvalidTransactionException(this.CurrentState.ToString(), to.ToString());
+                }
 
-            this.CurrentState = to;
+                this.CurrentState = to;
+            }
             return this.CurrentState;
         }
 
