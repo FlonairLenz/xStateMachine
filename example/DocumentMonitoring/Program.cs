@@ -14,14 +14,7 @@ namespace DocumentMonitoring
             Console.WriteLine($"Current document state: { document.State.ToString() }");
             document.Publish();
             Console.WriteLine($"Current document state: { document.State.ToString() }");
-            if (document.IsImportant())
-            {
-                document.Archive();
-            }
-            else
-            {
-                document.Delete();
-            }
+            document.Remove();
             Console.WriteLine($"Current document state: { document.State.ToString() }");
             try
             {

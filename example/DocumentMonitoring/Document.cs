@@ -1,3 +1,4 @@
+using System;
 using xStateMachine;
 
 namespace DocumentMonitoring
@@ -33,23 +34,41 @@ namespace DocumentMonitoring
 
         public void Change(string newText)
         {
-            this.Text = newText;
-            this._stateMachine.ChangeState(DocumentState.Changed);
+            if (this._stateMachine.IsTransactionAllowedTo(DocumentState.Changed))
+            {
+                this.Text = newText;
+                this._stateMachine.ChangeState(DocumentState.Changed);
+            }
+        }
+
+        public void Remove()
+        {
+            var removeDocumentState = IsImportant() ? DocumentState.Archived : DocumentState.Deleted;
+            this._stateMachine.ChangeState(removeDocumentState);
         }
 
         public void Archive()
         {
-            this._stateMachine.ChangeState(DocumentState.Archived);
+            if (this._stateMachine.IsTransactionAllowedTo(DocumentState.Archived))
+            {
+                // Do something
+                this._stateMachine.ChangeState(DocumentState.Archived);
+            }
         }
 
         public void Delete()
         {
+            // Do something
             this._stateMachine.ChangeState(DocumentState.Deleted);
         }
         
         public void Publish()
         {
-            this._stateMachine.ChangeState(DocumentState.Published);
+            if (this._stateMachine.IsTransactionAllowedTo(DocumentState.Published))
+            {
+                // Do something to publish
+                this._stateMachine.ChangeState(DocumentState.Published);
+            }
         }
 
         public bool IsImportant() => _isImportant;
