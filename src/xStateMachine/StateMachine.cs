@@ -78,7 +78,7 @@ namespace xStateMachine
         /// <returns>The current state after the transition ends</returns>
         public T ChangeState(T to)
         {
-            if (this.CurrentState.Equals(to)) 
+            if (!this.CurrentState.Equals(to)) 
             {
                 if (!IsTransitionAllowedTo(to))
                 {
