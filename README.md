@@ -32,7 +32,7 @@ this._stateMachine = StateMachineBuilder.Create(DocumentState.Created);
 ## Add transaction
 
 ``` csharp
-this._stateMachine.AddTransaction(DocumentState.Created, DocumentState.Published);
+this._stateMachine.AddTransition(DocumentState.Created, DocumentState.Published);
 ```
 
 ## Change state
@@ -40,7 +40,7 @@ this._stateMachine.AddTransaction(DocumentState.Created, DocumentState.Published
 ``` csharp
 public void Publish()
 {
-    if (this._stateMachine.IsTransactionAllowedTo(DocumentState.Published))
+    if (this._stateMachine.IsTransitionAllowedTo(DocumentState.Published))
     {
         // Do something to publish
         this._stateMachine.ChangeState(DocumentState.Published);
